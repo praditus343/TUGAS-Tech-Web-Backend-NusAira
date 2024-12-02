@@ -1,3 +1,6 @@
-## 📹 Video
+# 📹 Video  
 
-[![Watch the video](https://www.youtube.com/watch?v=noIbYR-UFMk/0.jpg)](https://www.youtube.com/watch?v=noIbYR-UFMk)
+<video width="100%" height="auto" controls autoplay muted>
+  <source src="./video.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
