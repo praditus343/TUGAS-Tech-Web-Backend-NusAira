@@ -1,3 +1,3 @@
-## 📹 Video 
+## 📹 Video
 
-🎥 [Click here to watch the video](./vidio.mp4)
+[![Watch the video](https://img.youtube.com/vi/YOUR_VIDEO_ID/0.jpg)](./vidio.mp4)
