@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Notes</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="/css/index.css">
+</head>
+<body>
+
+    <h1>All Notes</h1>
+    <div class="container">
+        <a href="/notes/create" class="create-btn">Create New Note</a>
+        <table>
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Date</th>
+                    <th>Note</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% notes.forEach(note => { %>
+                    <tr>
+                        <td><%= note.title %></td>
+                        <td data-datetime="<%= note.datetime %>"></td>
+                        <td><%= note.note %></td>
+                        <td class="actions">
+                            <button onclick="deleteNote('<%= note.id %>')">Delete</button>
+                            <button onclick="window.location.href='/notes/<%= note.id %>/edit';" class="btn-edit">Edit</button>
+                        </td>                        
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const dateCells = document.querySelectorAll('td[data-datetime]');
+            
+            dateCells.forEach(cell => {
+                const rawDate = cell.getAttribute('data-datetime'); 
+                if (rawDate) {
+                    const date = new Date(rawDate); 
+                    if (!isNaN(date)) {
+                        const formattedDate = date.toLocaleString('en-GB', {
+                            weekday: 'short', 
+                            month: 'short',  
+                            day: '2-digit',   
+                            year: 'numeric',  
+                            hour: '2-digit',  
+                            minute: '2-digit',
+                            hour12: false     
+                        }).replace(',', ''); 
+                        cell.textContent = formattedDate; 
+                    } else {
+                        cell.textContent = 'Invalid Date'; 
+                    }
+                } else {
+                    cell.textContent = 'No Date'; 
+                }
+            });
+        });
+
+        function deleteNote(id) {
+            if (confirm('Are you sure you want to delete this note?')) {
+                axios.post(`/notes/${id}/delete`)
+                    .then(response => {
+                        window.location.reload(); 
+                    })
+                    .catch(error => {
+                        console.error('Error deleting note:', error);
+                    });
+            }
+        }
+    </script>
+
+</body>
+</html>

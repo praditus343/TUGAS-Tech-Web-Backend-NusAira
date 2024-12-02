@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Note</title>
+    <link rel="stylesheet" href="/css/create.css">
+</head>
+<body>
+
+    <h1>Create New Note</h1>
+    <div class="container">
+        <form action="/notes/create" method="POST">
+            <label for="title">Title</label>
+            <input type="text" name="title" id="title" required>
+
+            <label for="datetime">Date</label>
+            <input type="datetime-local" name="datetime" id="datetime" required>
+
+            <label for="note">Note</label>
+            <textarea name="note" id="note" required></textarea>
+
+            <button type="submit">Create Note</button>
+        </form>
+        <a href="/notes">Back to Notes</a>
+    </div>
+
+</body>
+</html>
